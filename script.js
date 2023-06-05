@@ -23,7 +23,15 @@ function activateBoxes() {
   const boxes = document.querySelectorAll(".grid-item");
   boxes.forEach((box) => {
     box.addEventListener("click", () => {
-      console.log("a box has been clicked");
+      let itemIndicator = box.classList[box.classList.length - 1];
+      /*FIXME: 
+      1. use the itemIndicator's value to update game.board
+      2. add <p> to the clicked box. The text content can be anything for now.
+      3. after step 2, replace it with either "X" or "O".
+      4. After that, think about the switching of "X" and "O" after every turn.
+      */
+
+      box.textContent = document.createElement("p").classList.add("white-text");
     });
   });
 }

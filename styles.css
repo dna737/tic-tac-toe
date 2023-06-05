@@ -3,6 +3,10 @@ html {
   --white-border: 5px solid white;
 }
 
+h1 {
+  font-family: "Arial Narrow Bold", sans-serif;
+}
+
 .container {
   border: 1px solid black;
   display: grid;
@@ -10,6 +14,10 @@ html {
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   /* gap: 10px; */
+}
+
+.game-header {
+  color: white;
 }
 
 .grid-item {
@@ -22,6 +30,7 @@ html {
 body {
   background-color: black;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 80vh;

@@ -16,9 +16,7 @@ h1 {
   /* gap: 10px; */
 }
 
-.game-header,
-.rule-specifier,
-.curr-specifier {
+.white-text {
   color: white;
 }
 

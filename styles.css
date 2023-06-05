@@ -16,8 +16,16 @@ h1 {
   /* gap: 10px; */
 }
 
-.game-header {
+.game-header,
+.rule-specifier,
+.curr-specifier {
   color: white;
+}
+
+.rule-specifier,
+.curr-specifier {
+  justify-items: flex-end;
+  font-size: 3.49vh;
 }
 
 .grid-item {
@@ -31,7 +39,7 @@ body {
   background-color: black;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 80vh;
 }

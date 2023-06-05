@@ -1,7 +1,3 @@
-//to identify whose turn it is, you can use a variable. If it's even, then it's "X" and "O" otherwise.
-
-//know what player's turn it is
-
 /*
     1. know what player's turn it is
     2. know what character belongs to a player
@@ -22,3 +18,20 @@ const game = (() => {
 
   return { board, playerOne, playerTwo };
 })();
+
+function activateBoxes() {
+  const boxes = document.querySelectorAll(".grid-item");
+  boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+      console.log("a box has been clicked");
+    });
+  });
+}
+
+activateBoxes();
+
+function displayGame() {
+  console.log(game.board);
+}
+
+displayGame();

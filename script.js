@@ -15,23 +15,35 @@ const game = (() => {
   let board = new Array(9).fill("");
   const playerOne = createPlayer(1, "X");
   const playerTwo = createPlayer(2, "O");
+  let clicks = 0; //These clicks will be useful to identify the current player.
+  const makeMove = function (currPlayer, index) {
+    board[index] = currPlayer.char;
+    //TODO: make it more restrictive later.
+    console.log("currPlayer:", currPlayer, "\t index:", index);
+  };
 
-  return { board, playerOne, playerTwo };
+  return { board, playerOne, playerTwo, makeMove };
 })();
 
 function activateBoxes() {
   const boxes = document.querySelectorAll(".grid-item");
   boxes.forEach((box) => {
     box.addEventListener("click", () => {
-      let itemIndicator = box.classList[box.classList.length - 1];
+      let itemIndex = parseInt(
+        box.classList[box.classList.length - 1].substring(5)
+      );
       /*FIXME: 
-      1. use the itemIndicator's value to update game.board
+      1. use the itemIndex's value to update game.board
       2. add <p> to the clicked box. The text content can be anything for now.
       3. after step 2, replace it with either "X" or "O".
       4. After that, think about the switching of "X" and "O" after every turn.
       */
-
-      box.textContent = document.createElement("p").classList.add("white-text");
+      console.log(itemIndex);
+      if (game.clicks % 2 == 0) {
+        game.makeMove(game.playerOne, itemIndex);
+      } else {
+        game.makeMove(game.playerTwo, itemIndex);
+      }
     });
   });
 }

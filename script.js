@@ -22,9 +22,23 @@ const game = (() => {
     console.log("currPlayer:", currPlayer, "\t index:", index);
     //TODO: create another function that displays the result on the screen ("X" mark after the first click, etc.), and
     //then implement the validators.
+    //NOTE: the code below is a rough layout of what needs to be implemented later in this method.
+    /*
+    let currPlayer = null;
+    if(clicks % 2 == 0){
+        currPlayer = playerOne;
+    }else{
+        currPlayer = playerTwo;
+    }
+
+    do stuff with currPlayer's attributes.
+    */
+  };
+  const validateInput = function (index) {
+    return board[index] === "";
   };
 
-  return { board, playerOne, playerTwo, makeMove, clicks };
+  return { board, makeMove, clicks, validateInput };
 })();
 
 function activateBoxes() {
@@ -43,11 +57,8 @@ function activateBoxes() {
 
       //TODO: increment `game.clicks` to make sure the input varies.
       console.log(itemIndex);
-      if (game.clicks % 2 == 0) {
-        game.makeMove(game.playerOne, itemIndex);
-      } else {
-        game.makeMove(game.playerTwo, itemIndex);
-      }
+      console.log(game.validateInput(itemIndex));
+      //FIXME: add an if-else statement. If the move is correct, then call the makeMove function; otherwise, call the displayInvalidInput() function.
       ++game.clicks;
     });
   });

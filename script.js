@@ -43,7 +43,11 @@ const game = (() => {
 
   const placePlayerMarker = function (gridItem) {
     console.log("hi from the placePlayerMarker methdo! :)");
-    console.log(gridItem);
+    console.log("gridItem", gridItem);
+    let marker = document.createElement("h1");
+    marker.textContent = "X";
+    marker.classList.add("white-text", "marker");
+    gridItem.appendChild(marker);
   };
 
   return { board, makeMove, clicks, validateInput, placePlayerMarker };
@@ -53,8 +57,9 @@ function activateBoxes() {
   const boxes = document.querySelectorAll(".grid-item");
   boxes.forEach((box) => {
     box.addEventListener("click", () => {
-      let gridItem = box.classList[box.classList.length - 1];
-      let itemIndex = parseInt(gridItem.substring(5)); //fetches "item-0".."item-8"
+      let itemIndex = parseInt(
+        box.classList[box.classList.length - 1].substring(5)
+      ); //fetches "item-0".."item-8"
 
       /*FIXME: 
       1. use the itemIndex's value to update game.board
@@ -68,8 +73,8 @@ function activateBoxes() {
 
       if (game.validateInput(itemIndex)) {
         game.makeMove(itemIndex);
+        game.placePlayerMarker(box);
         ++game.clicks;
-        game.placePlayerMarker(gridItem);
       } else {
         alert("Please select another grid item.");
       }

@@ -32,8 +32,6 @@ const game = (() => {
     board[index] = currPlayer.char;
     //TODO: make it more restrictive later.
     console.log("currPlayer:", currPlayer, "\t index:", index);
-    //TODO: create another function that displays the result on the screen ("X" mark after the first click, etc.), and
-    //then implement the validators.
     //NOTE: the code below is a rough layout of what needs to be implemented later in this method.
     //do stuff with currPlayer's attributes.
 
@@ -43,16 +41,21 @@ const game = (() => {
     return board[index] === "";
   };
 
-  return { board, makeMove, clicks, validateInput };
+  const placePlayerMarker = function (gridItem) {
+    console.log("hi from the placePlayerMarker methdo! :)");
+    console.log(gridItem);
+  };
+
+  return { board, makeMove, clicks, validateInput, placePlayerMarker };
 })();
 
 function activateBoxes() {
   const boxes = document.querySelectorAll(".grid-item");
   boxes.forEach((box) => {
     box.addEventListener("click", () => {
-      let itemIndex = parseInt(
-        box.classList[box.classList.length - 1].substring(5)
-      );
+      let gridItem = box.classList[box.classList.length - 1];
+      let itemIndex = parseInt(gridItem.substring(5)); //fetches "item-0".."item-8"
+
       /*FIXME: 
       1. use the itemIndex's value to update game.board
       2. add <p> to the clicked box. The text content can be anything for now.
@@ -60,16 +63,15 @@ function activateBoxes() {
       4. After that, think about the switching of "X" and "O" after every turn.
       */
 
-      //TODO: increment `game.clicks` to make sure the input varies.
       console.log(itemIndex);
       console.log(game.validateInput(itemIndex));
-      //FIXME: add an if-else statement. If the move is correct, then call the makeMove function; otherwise, call the displayInvalidInput() function.
 
       if (game.validateInput(itemIndex)) {
         game.makeMove(itemIndex);
         ++game.clicks;
+        game.placePlayerMarker(gridItem);
       } else {
-        console.log("reclicked on an old grid item!");
+        alert("Please select another grid item.");
       }
     });
   });

@@ -20,9 +20,11 @@ const game = (() => {
     board[index] = currPlayer.char;
     //TODO: make it more restrictive later.
     console.log("currPlayer:", currPlayer, "\t index:", index);
+    //TODO: create another function that displays the result on the screen ("X" mark after the first click, etc.), and
+    //then implement the validators.
   };
 
-  return { board, playerOne, playerTwo, makeMove };
+  return { board, playerOne, playerTwo, makeMove, clicks };
 })();
 
 function activateBoxes() {
@@ -38,12 +40,15 @@ function activateBoxes() {
       3. after step 2, replace it with either "X" or "O".
       4. After that, think about the switching of "X" and "O" after every turn.
       */
+
+      //TODO: increment `game.clicks` to make sure the input varies.
       console.log(itemIndex);
       if (game.clicks % 2 == 0) {
         game.makeMove(game.playerOne, itemIndex);
       } else {
         game.makeMove(game.playerTwo, itemIndex);
       }
+      ++game.clicks;
     });
   });
 }

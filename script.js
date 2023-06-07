@@ -17,9 +17,9 @@ const game = (() => {
   const playerTwo = createPlayer(2, "O");
   let clicks = 0; //These clicks act like a binary switch to identify the current player.
 
-  const fetchCurrentPlayer = function (index) {
+  const fetchCurrentPlayer = function () {
     let currPlayer = null;
-    if (index % 2 === 0) {
+    if (game.clicks % 2 === 0) {
       currPlayer = playerOne;
     } else {
       currPlayer = playerTwo;
@@ -28,12 +28,11 @@ const game = (() => {
   };
 
   const makeMove = function (index) {
-    let currPlayer = fetchCurrentPlayer(index);
+    let currPlayer = fetchCurrentPlayer();
     board[index] = currPlayer.char;
     //TODO: make it more restrictive later.
     console.log("currPlayer:", currPlayer, "\t index:", index);
     //NOTE: the code below is a rough layout of what needs to be implemented later in this method.
-    //do stuff with currPlayer's attributes.
 
     board[index] = currPlayer.char; //esdf continue from here.
   };
@@ -41,16 +40,44 @@ const game = (() => {
     return board[index] === "";
   };
 
-  const placePlayerMarker = function (gridItem) {
+  const placePlayerMarker = function (index, gridItem) {
     console.log("hi from the placePlayerMarker methdo! :)");
     console.log("gridItem", gridItem);
     let marker = document.createElement("h1");
-    marker.textContent = "X";
+    marker.textContent = fetchCurrentPlayer(index).char;
     marker.classList.add("white-text", "marker");
     gridItem.appendChild(marker);
   };
 
-  return { board, makeMove, clicks, validateInput, placePlayerMarker };
+  const checkEndGame = function () {
+    return checkDiagonals();
+    // || checkVerticals || checkHorizontals;
+  };
+  const checkDiagonals = function () {
+    console.log("checkDiagonals");
+    let decreasingDiagonal =
+      board[0] !== "" && board[0] === board[4] && board[4] === board[8];
+    let increasingDiagonal =
+      board[2] !== "" && board[2] === board[4] && board[2] === board[6];
+    if (decreasingDiagonal || increasingDiagonal) {
+      console.log("winner!");
+    }
+
+    return decreasingDiagonal || increasingDiagonal;
+  };
+
+  const checkVerticals = function () {};
+
+  const checkHorizontals = function () {};
+
+  return {
+    board,
+    makeMove,
+    clicks,
+    validateInput,
+    placePlayerMarker,
+    checkEndGame,
+  };
 })();
 
 function activateBoxes() {
@@ -73,7 +100,9 @@ function activateBoxes() {
 
       if (game.validateInput(itemIndex)) {
         game.makeMove(itemIndex);
-        game.placePlayerMarker(box);
+        game.placePlayerMarker(itemIndex, box);
+        game.checkEndGame();
+        console.log("game clicks just incremented!");
         ++game.clicks;
       } else {
         alert("Please select another grid item.");

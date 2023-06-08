@@ -50,8 +50,14 @@ const game = (() => {
   };
 
   const checkEndGame = function () {
-    return checkDiagonals() || checkVerticals() || checkHorizontals();
+    return (
+      checkDiagonals() ||
+      checkVerticals() ||
+      checkHorizontals() ||
+      checkCompletion()
+    );
   };
+
   const checkDiagonals = function () {
     console.log("checkDiagonals");
     let decreasingDiagonal =
@@ -95,6 +101,10 @@ const game = (() => {
     return topHorizontal || midHorizontal || bottomHorizontal;
   };
 
+  const checkCompletion = function () {
+    return !board.includes("");
+  };
+
   return {
     board,
     makeMove,
@@ -126,7 +136,9 @@ function activateBoxes() {
       if (game.validateInput(itemIndex)) {
         game.makeMove(itemIndex);
         game.placePlayerMarker(itemIndex, box);
-        game.checkEndGame();
+        if (game.checkEndGame()) {
+          restartGame();
+        }
         console.log("game clicks just incremented!");
         ++game.clicks;
       } else {
@@ -134,6 +146,11 @@ function activateBoxes() {
       }
     });
   });
+}
+
+function restartGame() {
+  //TODO: add a div overlay that covers the entire screen and mentions the winner.
+  location.reload();
 }
 
 activateBoxes();

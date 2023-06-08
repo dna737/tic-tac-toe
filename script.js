@@ -50,8 +50,7 @@ const game = (() => {
   };
 
   const checkEndGame = function () {
-    return checkDiagonals() || checkVerticals();
-    //|| checkHorizontals;
+    return checkDiagonals() || checkVerticals() || checkHorizontals();
   };
   const checkDiagonals = function () {
     console.log("checkDiagonals");
@@ -81,7 +80,20 @@ const game = (() => {
     return leftVertical || midVertical || rightVertical;
   };
 
-  const checkHorizontals = function () {};
+  const checkHorizontals = function () {
+    console.log("checkHorizontals");
+    let topHorizontal =
+      board[0] !== "" && board[0] === board[1] && board[0] === board[2];
+    let midHorizontal =
+      board[3] !== "" && board[3] === board[4] && board[3] === board[5];
+    let bottomHorizontal =
+      board[6] !== "" && board[6] === board[7] && board[6] === board[8];
+
+    if (topHorizontal || midHorizontal || bottomHorizontal) {
+      console.log("winnerViaHorizontal!");
+    }
+    return topHorizontal || midHorizontal || bottomHorizontal;
+  };
 
   return {
     board,

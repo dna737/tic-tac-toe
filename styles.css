@@ -27,6 +27,10 @@ h1 {
   font-size: 3.49vh;
 }
 
+.verdict {
+  background-color: yellow;
+}
+
 .grid-item {
   height: var(--dimension, 20vh);
   width: var(--dimension, 80vw);

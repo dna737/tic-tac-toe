@@ -1,6 +1,6 @@
 const createPlayer = (char) => {
   let name = prompt(`Please enter the player's name for ${char} mark`);
-  if (name === "") {
+  if (name === null || name === "") {
     name = char === "X" ? "Player 1" : "Player 2";
   }
 

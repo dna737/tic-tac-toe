@@ -145,9 +145,6 @@ function setBoxBehavior(box) {
     game.makeMove(itemIndex);
     game.placePlayerMarker(itemIndex, box);
     if (game.checkEndGame()) {
-      setTimeout(() => {
-        restartGame();
-      }, "1000");
       deactivateBoxes();
       console.log("calling decativate boxes:");
     }
@@ -172,9 +169,9 @@ function deactivateBoxes() {
   });
 }
 
-function restartGame() {
-  //TODO: add a div overlay that covers the entire screen and mentions the winner.
-  location.reload();
-}
-
 activateBoxes();
+
+const reloadButton = document.querySelector(".restart-button");
+reloadButton.addEventListener("click", () => {
+  location.reload();
+});

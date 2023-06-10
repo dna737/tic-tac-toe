@@ -137,7 +137,7 @@ function activateBoxes() {
         game.makeMove(itemIndex);
         game.placePlayerMarker(itemIndex, box);
         if (game.checkEndGame()) {
-          restartGame();
+          setTimeout(restartGame(), 3000);
         }
         console.log("game clicks just incremented!");
         ++game.clicks;

@@ -21,7 +21,8 @@ h1 {
 }
 
 .rule-specifier,
-.curr-specifier {
+.curr-specifier,
+.verdict {
   justify-items: flex-end;
   font-size: 3.49vh;
 }

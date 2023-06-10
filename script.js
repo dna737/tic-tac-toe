@@ -52,10 +52,7 @@ const game = (() => {
 
   const checkEndGame = function () {
     return (
-      checkDiagonals() ||
-      checkVerticals() ||
-      checkHorizontals() ||
-      checkCompletion()
+      checkDiagonals() || checkVerticals() || checkHorizontals() || checkDraw()
     );
   };
 
@@ -104,8 +101,13 @@ const game = (() => {
     return topHorizontal || midHorizontal || bottomHorizontal;
   };
 
-  const checkCompletion = function () {
-    return !board.includes("");
+  const checkDraw = function () {
+    result = !board.includes("");
+    if (result) {
+      verdict.textContent = "It's a tie!";
+    }
+
+    return result; //all the spots on the board have been taken.
   };
 
   return {

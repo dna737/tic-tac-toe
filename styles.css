@@ -22,13 +22,28 @@ h1 {
 
 .rule-specifier,
 .curr-specifier,
-.verdict {
+.verdict,
+.restart-button {
   justify-items: flex-end;
   font-size: 3.49vh;
 }
 
 .verdict {
   background-color: yellow;
+}
+
+.restart-button {
+  background-color: blue;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.restart-button:active {
+  background-color: rgb(59, 59, 255);
+}
+
+.restart-button:hover {
+  cursor: pointer;
 }
 
 .grid-item {
@@ -60,4 +75,8 @@ body {
 
 .border-bot {
   border-bottom: var(--white-border, 2px solid aqua);
+}
+
+.reload {
+  font-family: Lucida Sans Unicode;
 }

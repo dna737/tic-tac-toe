@@ -16,6 +16,7 @@ const game = (() => {
   const playerOne = createPlayer(1, "X");
   const playerTwo = createPlayer(2, "O");
   let clicks = 0; //These clicks act like a binary switch to identify the current player.
+  const verdict = document.querySelector(".verdict"); //shows the final result of the match.
 
   const fetchCurrentPlayer = function () {
     let currPlayer = null;
@@ -64,8 +65,10 @@ const game = (() => {
       board[0] !== "" && board[0] === board[4] && board[4] === board[8];
     let increasingDiagonal =
       board[2] !== "" && board[2] === board[4] && board[2] === board[6];
-    if (decreasingDiagonal || increasingDiagonal) {
-      console.log("winner!");
+    if (decreasingDiagonal) {
+      verdict.textContent = `Winner: ${board[0]}`;
+    } else if (increasingDiagonal) {
+      verdict.textContent = `Winner: ${board[2]}`;
     }
 
     return decreasingDiagonal || increasingDiagonal;
@@ -137,7 +140,9 @@ function activateBoxes() {
         game.makeMove(itemIndex);
         game.placePlayerMarker(itemIndex, box);
         if (game.checkEndGame()) {
-          setTimeout(restartGame(), 3000);
+          setTimeout(() => {
+            restartGame();
+          }, "1000");
         }
         console.log("game clicks just incremented!");
         ++game.clicks;

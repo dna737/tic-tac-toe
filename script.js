@@ -1,11 +1,11 @@
 /*
-    1. know what player's turn it is
-    2. know what character belongs to a player
+1. know what player's turn it is
+2. know what character belongs to a player
     3. identify the winning criteria and draw criteria (it's okay if it ends after all the slots have been occupied)
     4. score alterations should be private, so we should be using closures for this (IIFE).
     5. the only functions that could be public are the ones that make a move (for example: makeMove(player))
     
-*/
+    */
 
 const createPlayer = (num, char) => {
   return { num, char };
@@ -146,9 +146,9 @@ function activateBoxes() {
       ); //fetches "item-0".."item-8"
 
       /*FIXME: 
-      1. use the itemIndex's value to update game.board
-      2. add <p> to the clicked box. The text content can be anything for now.
-      3. after step 2, replace it with either "X" or "O".
+        1. use the itemIndex's value to update game.board
+        2. add <p> to the clicked box. The text content can be anything for now.
+        3. after step 2, replace it with either "X" or "O".
       4. After that, think about the switching of "X" and "O" after every turn.
       */
 
@@ -162,6 +162,7 @@ function activateBoxes() {
           setTimeout(() => {
             restartGame();
           }, "1000");
+          deactivateBoxes();
         }
         console.log("game clicks just incremented!");
         ++game.clicks;
@@ -169,6 +170,13 @@ function activateBoxes() {
         alert("Please select another grid item.");
       }
     });
+  });
+}
+
+function deactivateBoxes() {
+  const boxes = document.querySelectorAll(".grid-item");
+  boxes.forEach((box) => {
+    box.removeEventListener("click");
   });
 }
 

@@ -118,35 +118,38 @@ const game = (() => {
   };
 })();
 
+function setBoxBehavior(box) {
+  let itemIndex = parseInt(
+    box.classList[box.classList.length - 1].substring(5)
+  ); //fetches "item-0".."item-8"
+
+  if (game.validateInput(itemIndex)) {
+    game.makeMove(itemIndex);
+    game.placePlayerMarker(itemIndex, box);
+    if (game.checkEndGame()) {
+      setTimeout(() => {
+        restartGame();
+      }, "1000");
+      deactivateBoxes();
+      console.log("calling decativate boxes:");
+    }
+    ++game.clicks;
+  } else {
+    alert("Please select another grid item.");
+  }
+}
+
 function activateBoxes() {
   const boxes = document.querySelectorAll(".grid-item");
   boxes.forEach((box) => {
-    box.addEventListener("click", () => {
-      let itemIndex = parseInt(
-        box.classList[box.classList.length - 1].substring(5)
-      ); //fetches "item-0".."item-8"
-
-      if (game.validateInput(itemIndex)) {
-        game.makeMove(itemIndex);
-        game.placePlayerMarker(itemIndex, box);
-        if (game.checkEndGame()) {
-          setTimeout(() => {
-            restartGame();
-          }, "1000");
-          deactivateBoxes();
-        }
-        ++game.clicks;
-      } else {
-        alert("Please select another grid item.");
-      }
-    });
+    box.addEventListener("click", () => setBoxBehavior(box));
   });
 }
 
 function deactivateBoxes() {
   const boxes = document.querySelectorAll(".grid-item");
   boxes.forEach((box) => {
-    box.removeEventListener("click");
+    box.removeEventListener("click", () => setBoxBehavior(box));
   });
 }
 

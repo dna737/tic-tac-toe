@@ -187,11 +187,6 @@ function restartGame() {
 
 activateBoxes();
 
-//TODO: get rid of this function as it's only for debugging purposes.
-function displayGame() {
-  console.log(game.board);
-}
-
 //TODO: be wary of replacing the current item in the array once the user clicks the grid item. Once a box has been used, it should be irreplaceable.
 
 displayGame();

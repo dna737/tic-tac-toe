@@ -56,6 +56,10 @@ const game = (() => {
     );
   };
 
+  const displayVerdict = function (char) {
+    verdict.textContent = `Winner: ${char}`;
+  };
+
   const checkDiagonals = function () {
     console.log("checkDiagonals");
     let decreasingDiagonal =
@@ -63,9 +67,9 @@ const game = (() => {
     let increasingDiagonal =
       board[2] !== "" && board[2] === board[4] && board[2] === board[6];
     if (decreasingDiagonal) {
-      verdict.textContent = `Winner: ${board[0]}`;
+      displayVerdict(board[0]);
     } else if (increasingDiagonal) {
-      verdict.textContent = `Winner: ${board[2]}`;
+      displayVerdict(board[2]);
     }
 
     return decreasingDiagonal || increasingDiagonal;
@@ -80,9 +84,14 @@ const game = (() => {
     let rightVertical =
       board[2] !== "" && board[5] === board[2] && board[5] === board[8];
 
-    if (leftVertical || midVertical || rightVertical) {
-      console.log("winnerViaVertical!");
+    if (leftVertical) {
+      displayVerdict(board[0]);
+    } else if (midVertical) {
+      displayVerdict(board[1]);
+    } else if (rightVertical) {
+      displayVerdict(board[2]);
     }
+
     return leftVertical || midVertical || rightVertical;
   };
 
@@ -97,6 +106,14 @@ const game = (() => {
 
     if (topHorizontal || midHorizontal || bottomHorizontal) {
       console.log("winnerViaHorizontal!");
+    }
+
+    if (topHorizontal) {
+      displayVerdict(board[0]);
+    } else if (midHorizontal) {
+      displayVerdict(board[3]);
+    } else if (bottomHorizontal) {
+      displayVerdict(board[6]);
     }
     return topHorizontal || midHorizontal || bottomHorizontal;
   };

@@ -50,16 +50,8 @@ body {
   height: 80vh;
 }
 
-.border-lef {
-  border-left: var(--white-border, 2px solid aqua);
-}
-
 .border-rig {
   border-right: var(--white-border, 2px solid aqua);
-}
-
-.border-top {
-  border-top: var(--white-border, 2px solid aqua);
 }
 
 .border-bot {

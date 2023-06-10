@@ -1,5 +1,9 @@
 const createPlayer = (char) => {
   let name = prompt(`Please enter the player's name for ${char} mark`);
+  if (name === "") {
+    name = char === "X" ? "Player 1" : "Player 2";
+  }
+
   return { name, char };
 };
 
@@ -56,7 +60,8 @@ const game = (() => {
   };
 
   const displayVerdict = function (char) {
-    verdict.textContent = `Winner: ${char}`;
+    let winner = char === "X" ? playerOne : playerTwo;
+    verdict.textContent = `Winner: ${winner.name} (${winner.char})`;
   };
 
   const checkDiagonals = function () {

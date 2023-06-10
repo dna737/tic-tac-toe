@@ -1,11 +1,12 @@
-const createPlayer = (num, char) => {
-  return { num, char };
+const createPlayer = (char) => {
+  let name = prompt(`Please enter the player's name for ${char} mark`);
+  return { name, char };
 };
 
 const game = (() => {
   let board = new Array(9).fill("");
-  const playerOne = createPlayer(1, "X");
-  const playerTwo = createPlayer(2, "O");
+  const playerOne = createPlayer("X");
+  const playerTwo = createPlayer("O");
   let clicks = 0; //These clicks act like a binary switch to identify the current player.
   const verdict = document.querySelector(".verdict"); //shows the final result of the match.
 
@@ -19,8 +20,18 @@ const game = (() => {
     return currPlayer;
   };
 
+  const displayCurrentPlayer = function () {
+    let currPlayer = fetchCurrentPlayer();
+    let currSpeciferContent = document.querySelector(".curr-specifier > span");
+    if (board.every((val) => val === board[0])) {
+      currSpeciferContent.textContent = "O";
+    }
+    currSpeciferContent.textContent = currPlayer.char;
+  };
+
   const makeMove = function (index) {
     let currPlayer = fetchCurrentPlayer();
+    console.log("currPlayer from makeMove():", currPlayer);
     board[index] = currPlayer.char;
     console.log("currPlayer:", currPlayer, "\t index:", index);
     //NOTE: the code below is a rough layout of what needs to be implemented later in this method.
@@ -115,9 +126,11 @@ const game = (() => {
     validateInput,
     placePlayerMarker,
     checkEndGame,
+    displayCurrentPlayer,
   };
 })();
 
+//this function is responsible for placing the marker.
 function setBoxBehavior(box) {
   let itemIndex = parseInt(
     box.classList[box.classList.length - 1].substring(5)
@@ -134,6 +147,7 @@ function setBoxBehavior(box) {
       console.log("calling decativate boxes:");
     }
     ++game.clicks;
+    game.displayCurrentPlayer();
   } else {
     alert("Please select another grid item.");
   }
